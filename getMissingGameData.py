@@ -54,14 +54,14 @@ def getMissingDataForGameByName(gameName: str, retryCount=0):
             return getMissingDataForGameByName(gameName, retryCount=retryCount + 1)
 
 
-gamesDF = pd.read_csv('outputData/processado2.csv',
+gamesDF = pd.read_csv('outputData/processado6.csv',
                       delimiter=',', low_memory=False)
 
 missingDateCounter = 0
 
 try:
     for line in gamesDF.itertuples():
-        if (line.Index < 14200):
+        if (line.Index < 63000):
             continue
         if (pd.isna(line.release_date)):
             missingDateCounter += 1
@@ -74,6 +74,6 @@ try:
                     pass
                 gamesDF.loc[line.Index, missingDataI] = missingData[missingDataI]
             print(f"Processando jogo {line.Index} - {line.title}")
-    gamesDF.to_csv("outputData/processado3.csv", index=False)
-except KeyboardInterrupt:
-    gamesDF.to_csv("outputData/processado3.csv", index=False)
+    gamesDF.to_csv("outputData/processado8.csv", index=False)
+except:
+    gamesDF.to_csv("outputData/processado8.csv", index=False)
